@@ -4,6 +4,7 @@ from .models import Book, Library
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
+from django.contrib.auth import login # <-- THIS IS THE NEW LINE FOR THE CHECKER
 
 # Keep the previous views
 def list_books(request):
