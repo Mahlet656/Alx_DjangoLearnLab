@@ -1,5 +1,4 @@
 from django.shortcuts import render
-# Change is on the next line
 from django.views.generic.detail import DetailView
 from .models import Book
 from .models import Library
