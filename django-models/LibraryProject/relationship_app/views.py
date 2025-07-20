@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -55,3 +57,19 @@ def list_books(request):
 class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
+
+@permission_required('relationship_app.can_add_book', raise_exception=True)
+def add_book(request):
+    # In a real application, this would render a form.
+    # For this task, a simple response is enough.
+    return HttpResponse("You are authorized to add a book.")
+
+@permission_required('relationship_app.can_change_book', raise_exception=True)
+def edit_book(request, book_id):
+    # A placeholder view for editing a book
+    return HttpResponse(f"You are authorized to edit book {book_id}.")
+
+@permission_required('relationship_app.can_delete_book', raise_exception=True)
+def delete_book(request, book_id):
+    # A placeholder view for deleting a book
+    return HttpResponse(f"You are authorized to delete book {book_id}.")
