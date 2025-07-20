@@ -1,11 +1,13 @@
-from django.urls import path
-from django.contrib.auth import views as auth_views
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    # Manually define login and logout to satisfy the checker
-    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='registration/logged_out.html'), name='logout'),
-    # This now correctly points to a function named 'register' in views.py
+    # Auth URLs from previous task
+    path('accounts/', include('django.contrib.auth.urls')),
     path('register/', views.register, name='register'),
+
+    # New Role-Based URLs
+    path('admin-dashboard/', views.admin_view, name='admin_dashboard'),
+    path('librarian-dashboard/', views.librarian_view, name='librarian_dashboard'),
+    path('member-dashboard/', views.member_view, name='member_dashboard'),
 ]
