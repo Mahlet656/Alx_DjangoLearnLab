@@ -1,16 +1,14 @@
 
 
-from django.shortcuts import render, redirect
-
 # relationship_app/views.py
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
-from .models import Book, Library # Keep these for other views
-from django.views.generic.detail import DetailView # Keep this for other views
+from .models import Book, Library
+from django.views.generic.detail import DetailView
 
-# --- Task 1 Views (Should already be here) ---
+# --- Task 1 Views ---
 def list_books(request):
     books = Book.objects.all()
     return render(request, 'relationship_app/list_books.html', {'books': books})
@@ -44,9 +42,5 @@ def login_view(request):
     return render(request, 'relationship_app/login.html', {'form': form})
 
 def logout_view(request):
-    if request.method == 'POST':
-        logout(request)
-        return redirect('login')
-    # For simplicity, allow GET logout too
     logout(request)
     return render(request, 'relationship_app/logout.html')
