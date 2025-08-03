@@ -2,6 +2,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.views.generic.detail import DetailView # Keep specific import
+from .models import Book, Library
 # ... your other imports ...
 
 # ... list_books, LibraryDetailView ...
