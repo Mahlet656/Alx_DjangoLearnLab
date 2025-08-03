@@ -2,6 +2,7 @@
 # relationship_app/urls.py
 from django.urls import path
 from django.contrib.auth import views as auth_views
+# We only need to import our custom register view now
 from .views import register, list_books, LibraryDetailView
 
 urlpatterns = [
