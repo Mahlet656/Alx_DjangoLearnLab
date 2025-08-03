@@ -1,7 +1,11 @@
 # relationship_app/urls.py
+# relationship_app/urls.py
+
 from django.urls import path
-# Import the new views
-from .views import list_books, LibraryDetailView, register_view, login_view, logout_view
+# Import Django's built-in authentication views
+from django.contrib.auth import views as auth_views
+# Import your custom register_view
+from .views import list_books, LibraryDetailView, register_view
 
 urlpatterns = [
     # Existing URLs from Task 1
@@ -10,6 +14,12 @@ urlpatterns = [
 
     # New URLs for Authentication
     path('register/', register_view, name='register'),
-    path('login/', login_view, name='login'),
-    path('logout/', logout_view, name='logout'),
+    
+    # URL for Login: Use Django's built-in LoginView
+    # We tell it which template to use.
+    path('login/', auth_views.LoginView.as_view(template_name='relationship_app/login.html'), name='login'),
+    
+    # URL for Logout: Use Django's built-in LogoutView
+    # We tell it which template to use.
+    path('logout/', auth_views.LogoutView.as_view(template_name='relationship_app/logout.html'), name='logout'),
 ]
