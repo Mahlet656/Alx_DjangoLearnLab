@@ -11,7 +11,6 @@ def list_books(request):
     return render(request, 'relationship_app/list_books.html', context)
 
 # Class-based view to display details for a single library
-# We use DetailView because it's designed to show a single object.
 class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
