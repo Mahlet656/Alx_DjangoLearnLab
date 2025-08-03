@@ -2,15 +2,10 @@
 # relationship_app/urls.py
 from django.urls import path
 from django.contrib.auth import views as auth_views
-# We only need to import our custom register view now
 from .views import register, list_books, LibraryDetailView
 
 urlpatterns = [
-    # Task 1 URLs
-    path('books/', list_books, name='book-list'),
-    path('library/<int:pk>/', LibraryDetailView.as_view(), name='library-detail'),
-
-    # Task 2 URLs
+    # ... Task 1 URLs ...
     path('register/', register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='relationship_app/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='relationship_app/logout.html'), name='logout'),
