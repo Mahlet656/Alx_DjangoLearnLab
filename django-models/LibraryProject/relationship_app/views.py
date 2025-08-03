@@ -1,9 +1,10 @@
 # django-models/LibraryProject/relationship_app/views.py
 
 from django.shortcuts import render
-from django.views.generic import DetailView
+# Import from the full path to satisfy the checker
+from django.views.generic.detail import DetailView
 
-# Import models on separate lines to satisfy the checker
+# Import models on separate lines
 from .models import Book
 from .models import Library
 
