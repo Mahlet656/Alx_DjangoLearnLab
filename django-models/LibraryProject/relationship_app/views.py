@@ -3,16 +3,19 @@
 # relationship_app/views.py
 
 from django.shortcuts import render, redirect
-# Import everything needed for both custom and built-in forms/functions
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login
-from django.contrib.auth import logout
+from django.contrib.auth import login, logout, authenticate
 from django.views.generic.detail import DetailView
-from .models import Book, Library
+from .models import Book, Library # Corrected to a single line
 
-# ... (your list_books and LibraryDetailView are here) ...
+def list_books(request):
+    all_books = Book.objects.all()
+    context = {'books': all_books}
+    return render(request, 'relationship_app/list_books.html', context)
 
-# --- User Authentication Views ---
+class LibraryDetailView(DetailView):
+    model = Library
+    template_name = 'relationship_app/library_detail.html'
 
 def register_view(request):
     if request.method == 'POST':
@@ -25,6 +28,7 @@ def register_view(request):
         form = UserCreationForm()
     return render(request, 'relationship_app/register.html', {'form': form})
 
+# ADD THESE MISSING VIEWS
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -39,7 +43,6 @@ def login_view(request):
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('login') # Redirect to the login page
-    # Handle GET request for logout as well
+        return redirect('login') # Redirect to the login page after logout
     logout(request)
     return render(request, 'relationship_app/logout.html')
