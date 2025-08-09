@@ -1,6 +1,6 @@
 # relationship_app/models.py
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 # --- Existing Models from Task 0 ---
 class Author(models.Model):
@@ -34,6 +34,24 @@ class UserProfile(models.Model):
         ('Librarian', 'Librarian'),
         ('Member', 'Member'),
     )
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='Member')
+
+    def __str__(self):
+        return f"{self.user.username} - {self.role}"
+    
+    
+class UserProfile(models.Model):
+    # Creates a one-to-one relationship with Django's User model.
+    # If a User is deleted, their profile is also deleted.
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    # Define the choices for the role field
+    ROLE_CHOICES = (
+        ('Admin', 'Admin'),
+        ('Librarian', 'Librarian'),
+        ('Member', 'Member'),
+    )
+    # The role field, with a default value of 'Member' for all new profiles.
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='Member')
 
     def __str__(self):

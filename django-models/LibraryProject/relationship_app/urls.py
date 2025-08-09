@@ -2,8 +2,7 @@
 # relationship_app/urls.py
 
 from django.urls import path
-# This line is where the error is happening. It means Python
-# cannot find the name 'list_books' inside the views.py file.
+from .views import admin_view, librarian_view, member_view
 from .views import (
     list_books, # <-- Check the spelling here
     LibraryDetailView,
@@ -19,4 +18,7 @@ urlpatterns = [
     path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    path('admin-view/', admin_view, name='admin_view'),
+    path('librarian-view/', librarian_view, name='librarian_view'),
+    path('member-view/', member_view, name='member_view'),
 ]
