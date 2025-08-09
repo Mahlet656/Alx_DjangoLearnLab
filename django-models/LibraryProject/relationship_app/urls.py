@@ -1,6 +1,6 @@
 
 # relationship_app/urls.py
-
+from .views import add_book_view, edit_book_view, delete_book_view
 from django.urls import path
 from .views import admin_view, librarian_view, member_view
 from .views import (
@@ -21,4 +21,7 @@ urlpatterns = [
     path('admin-view/', admin_view, name='admin_view'),
     path('librarian-view/', librarian_view, name='librarian_view'),
     path('member-view/', member_view, name='member_view'),
+    path('book/add/', add_book_view, name='add_book'),
+    path('book/<int:pk>/edit/', edit_book_view, name='edit_book'),
+    path('book/<int:pk>/delete/', delete_book_view, name='delete_book'),
 ]

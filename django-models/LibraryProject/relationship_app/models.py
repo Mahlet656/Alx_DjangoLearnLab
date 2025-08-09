@@ -10,10 +10,18 @@ class Author(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+
+    class Meta:
+        permissions = [
+            ("can_add_book", "Can add book"),
+            ("can_change_book", "Can change book"),
+            ("can_delete_book", "Can delete book"),
+        ]
+
     def __str__(self):
         return self.title
-
+    
 class Library(models.Model):
     name = models.CharField(max_length=100)
     books = models.ManyToManyField(Book, related_name='libraries')
@@ -41,11 +49,8 @@ class UserProfile(models.Model):
     
     
 class UserProfile(models.Model):
-    # Creates a one-to-one relationship with Django's User model.
-    # If a User is deleted, their profile is also deleted.
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     
-    # Define the choices for the role field
     ROLE_CHOICES = (
         ('Admin', 'Admin'),
         ('Librarian', 'Librarian'),

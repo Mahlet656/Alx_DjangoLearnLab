@@ -1,6 +1,6 @@
 
-
-# relationship_app/views.py
+from django.contrib.auth.decorators import permission_required
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -68,3 +68,17 @@ def librarian_view(request):
 @user_passes_test(is_member)
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
+
+@permission_required('relationship_app.can_add_book', raise_exception=True)
+def add_book_view(request):
+    return redirect('book-list')
+
+@permission_required('relationship_app.can_change_book', raise_exception=True)
+def edit_book_view(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    return redirect('book-list')
+
+@permission_required('relationship_app.can_delete_book', raise_exception=True)
+def delete_book_view(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    return redirect('book-list')
